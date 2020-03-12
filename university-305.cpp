@@ -23,8 +23,6 @@ int main()
         bmm = b % a;
     }
 
-
-
     cout << a << endl;
 
     return 0;
