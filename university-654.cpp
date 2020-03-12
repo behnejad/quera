@@ -1,6 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <set>
 #include <cmath>
 
 using namespace std;
@@ -13,38 +11,44 @@ int main()
     if (n < 12)
     {
         cout << "Impossible" << endl;
+        return 0;
     }
     else
     {
         int a = n >> 1;
-        vector<pair<int, long>> moraba;
 
-        int i = 2;
-        long j = i * i;
-        while (i < a)
+        for (int i = 2; i < a; ++i)
         {
-            moraba.push_back(pair<int, long>(i, j));
-            ++i;
-            j = i * i;
-        }
+            long long j = i * i;
+            long long k = n - i;
+            long long k2 = k * k;
+            long long i2k2 = (j + k2) * (j + k2);
+            long long c2 = i2k2/ (k2 << 2);
+            long double c = sqrt(c2);
 
-//        cout << moraba.size() << endl;
-        for (unsigned long long i = 0; i < moraba.size(); ++i)
-        {
-            for (unsigned long long j = i; j < moraba.size(); ++j)
+            if (c == (long long) c)
             {
-                int t = moraba[i].second + moraba[j].second;
-                if ((moraba[i].first + moraba[j].first + sqrt(t) == n))
+                int q = i;
+                int w = c;
+                int e = n - w - q;
+                if (q > w)
                 {
-//                    cout << moraba[i].second << " " << moraba[j].second << " " << t << endl;
-                    cout << moraba[i].first << " " << moraba[j].first << " " << sqrt(t) << endl;
-                    return 0;
+                    swap(q, w);
                 }
+                if (w > e)
+                {
+                    swap(w, e);
+                }
+                if (q > w)
+                {
+                    swap(q, w);
+                }
+                cout << q << " " << w << " " << e << endl;
+                return 0;
             }
-        }
+        }    
     }
 
     cout << "Impossible" << endl;
-
     return 0;
 }

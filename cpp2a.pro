@@ -5,4 +5,4 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp \
-        university-654.cpp
+        university-277.cpp
