@@ -17,8 +17,6 @@ int main()
         bmm = b % a;
     }
 
-
-
     cout << a << " " << aa * bb / a << endl;
 
     return 0;
