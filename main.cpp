@@ -20,7 +20,7 @@ public:
 };
 
 
-int main1()
+int main21()
 {
     shared_ptr<cop> a(new cop());
     optional<cop> b;
