@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main1()
+int main()
 {
     long count = 0;
     int n, p;
@@ -30,7 +30,7 @@ int main1()
 
     }
 
-    /*
+
 
     vector<pair<int, int>> ti;
     int local_max = t[0];
@@ -93,7 +93,7 @@ int main1()
     {
 
     }
-    */
+
     cout << count << endl;
     return 0;
 }
