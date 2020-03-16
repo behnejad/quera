@@ -5,5 +5,4 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp \
-        university-296.cpp \
-        olympiad-8527.cpp
+        university-9744.cpp
