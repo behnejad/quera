@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main()
+int mainq()
 {
     long count = 0;
     int n, p;
