@@ -1,53 +1,106 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
 int ** array;
-long long maxi = 0;
+long long ** scores;
 int m;
 
-void start_game(int i, int j, long long sum, int asb)
+void start_game(int i, int j, int asb)
 {
+    long long t = 0;
+    long long local = 0;
+
     if (i == 0)
     {
-        if (j != 0 && array[i][j - 1] != 0)
+        if (j == 0)
         {
-            start_game(i, j - 1, sum + array[i][j], asb);
+            scores[i][j] = array[i][j];
         }
-        else
+        else if (scores[i][j - 1] == 0)
         {
-            sum += array[i][j];
-            if (maxi < sum)
-            {
-                maxi = sum;
-            }
+            scores[i][j] = array[i][j];
         }
+        else if (scores[i][j - 1] == -1)
+        {
+            start_game(i, j - 1, asb);
+        }
+        scores[i][j] = array[i][j] + scores[i][j - 1];
     }
     else
     {
-        if (j != 0 && array[i][j - 1] != 0)
+        if (j != 0)
         {
-             start_game(i, j - 1, sum + array[i][j], asb);
+            if (scores[i][j - 1] != 0)
+            {
+                if (scores[i][j] == -1)
+                {
+                    start_game(i, j - 1, asb);
+                }
+
+                if (scores[i][j - 1] != 0)
+                {
+                    t = array[i][j] + scores[i][j - 1];
+
+                    if (t > local)
+                    {
+                        local = t;
+                    }
+                }
+            }
         }
 
         if (i >= 2)
         {
             if (asb & 1)
             {
-                if (j < (m - 1) && array[i - 2][j + 1] != 0)
+                if (j < (m - 1))
                 {
-                    start_game(i - 2, j + 1, sum + array[i][j], asb + 1);
+                    if (scores[i - 2][j + 1] != 0)
+                    {
+                        if (scores[i - 2][j + 1] == -1)
+                        {
+                            start_game(i - 2, j + 1, asb + 1);
+                        }
+
+                        if (scores[i - 2][j + 1] != 0)
+                        {
+                            t = array[i][j] + scores[i - 2][j + 1];
+
+                            if (t > local)
+                            {
+                                local = t;
+                            }
+                        }
+                    }
                 }
             }
             else
             {
-                if (j > 0 && array[i - 2][j - 1] != 0)
+                if (j > 0)
                 {
-                    start_game(i - 2, j - 1, sum + array[i][j], asb + 1);
+                    if (scores[i - 2][j - 1] != 0)
+                    {
+                        if (scores[i - 2][j - 1] == -1)
+                        {
+                             start_game(i - 2, j - 1, asb + 1);
+                        }
+
+                         if (scores[i - 2][j - 1] != 0)
+                         {
+                             t = array[i][j] + scores[i - 2][j - 1];
+
+                             if (t > local)
+                             {
+                                 local = t;
+                             }
+                         }
+                    }
                 }
             }
         }
+
+        scores[i][j] = local;
     }
 }
 
@@ -57,27 +110,32 @@ int main()
     cin >> n >> m;
 
     array = new int *[n];
+    scores = new long long *[n];
     int asb = 0;
 
-//    vector<int> row;
     for (int i = 0; i < n; ++i)
     {
         array[i] = new int[m];
+        scores[i] = new long long[m];
         for (int j = 0; j < m; ++j)
         {
             cin >> asb;
             array[i][j] = asb;
-//            row.push_back(asb);
+            scores[i][j] = (asb == 0) ? 0 : -1;
         }
-//        array.push_back(move(row));
     }
 
-//    row = array[n - 1];
-    for (int j = m - 1; j >= 0; --j)
+    long long maxi = 0;
+    for (int j = 0; j < m; ++j)
     {
-        if (array[n-1][j] != 0)
+        if (scores[n-1][j] == -1)
         {
-            start_game(n-1, j, 0, 0);
+            start_game(n-1, j, 0);
+        }
+
+        if (maxi < scores[n-1][j])
+        {
+            maxi = scores[n-1][j];
         }
     }
 
