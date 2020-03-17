@@ -2,6 +2,7 @@ n = int(input())
 
 l = [input() for i in range(n)]
 
+first = l[0];
 min_len = 51
 min_str = 0
 
@@ -19,15 +20,21 @@ max_len = 0
 max_str = 0
 
 for sub in res:
+    exist = True
     for row in l:
-        if sub in row or sub[::-1] in row:
-            if len(sub) > max_len:
-                max_len = len(sub)
-                max_str = sub
-        else:
-            break;
+        if sub not in row and sub[::-1] not in row:
+            exist = False
+            break
+
+    if exist:
+        if len(sub) > max_len:
+            max_len = len(sub)
+            max_str = sub
 
 if max_len > 0:
-    print(max_str)
+    if max_str in first:
+        print(max_str)
+    elif max_str[::-1] in first:
+        print(max_str[::-1])
 
     
