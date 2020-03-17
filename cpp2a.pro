@@ -4,5 +4,5 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp \
-        university-364.cpp
+        contest-3538.cpp \
+        main.cpp
