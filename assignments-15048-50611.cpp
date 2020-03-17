@@ -6,108 +6,16 @@ int ** array;
 long long ** scores;
 int m;
 
-void start_game(int i, int j, int asb)
-{
-    long long t = 0;
-    long long local = 0;
-
-    if (i == 0)
-    {
-        if (j == 0)
-        {
-            scores[i][j] = array[i][j];
-        }
-        else if (scores[i][j - 1] == 0)
-        {
-            scores[i][j] = array[i][j];
-        }
-        else if (scores[i][j - 1] == -1)
-        {
-            start_game(i, j - 1, asb);
-        }
-        scores[i][j] = array[i][j] + scores[i][j - 1];
-    }
-    else
-    {
-        if (j != 0)
-        {
-            if (scores[i][j - 1] != 0)
-            {
-                if (scores[i][j] == -1)
-                {
-                    start_game(i, j - 1, asb);
-                }
-
-                if (scores[i][j - 1] != 0)
-                {
-                    t = array[i][j] + scores[i][j - 1];
-
-                    if (t > local)
-                    {
-                        local = t;
-                    }
-                }
-            }
-        }
-
-        if (i >= 2)
-        {
-            if (asb & 1)
-            {
-                if (j < (m - 1))
-                {
-                    if (scores[i - 2][j + 1] != 0)
-                    {
-                        if (scores[i - 2][j + 1] == -1)
-                        {
-                            start_game(i - 2, j + 1, asb + 1);
-                        }
-
-                        if (scores[i - 2][j + 1] != 0)
-                        {
-                            t = array[i][j] + scores[i - 2][j + 1];
-
-                            if (t > local)
-                            {
-                                local = t;
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (j > 0)
-                {
-                    if (scores[i - 2][j - 1] != 0)
-                    {
-                        if (scores[i - 2][j - 1] == -1)
-                        {
-                             start_game(i - 2, j - 1, asb + 1);
-                        }
-
-                         if (scores[i - 2][j - 1] != 0)
-                         {
-                             t = array[i][j] + scores[i - 2][j - 1];
-
-                             if (t > local)
-                             {
-                                 local = t;
-                             }
-                         }
-                    }
-                }
-            }
-        }
-
-        scores[i][j] = local;
-    }
-}
-
 int main()
 {
-    int n;
+    int n, m;
     cin >> n >> m;
+
+    if (n % 2 == 0)
+    {
+        cout << 0 << endl;
+        return 0;
+    }
 
     array = new int *[n];
     scores = new long long *[n];
@@ -125,14 +33,104 @@ int main()
         }
     }
 
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < m; ++j)
+        {
+            if (array[i][j] != 0)
+            {
+                if (i & 1)
+                {
+                    scores[i][j] = 0;
+                }
+                else if (i == 0)
+                {
+                    if (j > 0)
+                    {
+                        if (array[i][j] != 0)
+                        {
+                            scores[i][j] = array[i][j] + scores[i][j - 1];
+                        }
+                    }
+                    else
+                    {
+                        if (array[i][j] != 0)
+                        {
+                            scores[i][j] = array[i][j];
+                        }
+                    }
+                }
+                else
+                {
+                    bool zoj = ((i >> 1) - 1) % 2 == 0;
+
+                    if (j == 0)
+                    {
+                        if (j < (m - 1) && !zoj && scores[i - 2][j + 1] != 0)
+                        {
+                            scores[i][j] = array[i][j] + scores[i - 2][j + 1];
+                        }
+                        else
+                        {
+                            scores[i][j] = 0;
+                        }
+                    }
+                    else if (j == m - 1)
+                    {
+                        long long a1 = 0, a2 = 0;
+
+                        if (m > 1 && zoj && scores[i - 2][j - 1] != 0)
+                        {
+                            a1 = array[i][j] + scores[i - 2][j - 1];
+                        }
+
+                        if (scores[i][j - 1] != 0)
+                        {
+                            a2 = array[i][j] + scores[i][j - 1];
+                        }
+
+                        scores[i][j] = max(a1, a2);
+                    }
+                    else
+                    {
+                        long long a1 = 0, a2 = 0, a3 = 0;
+
+                        if (j > 0 && scores[i][j - 1] != 0)
+                        {
+                            a1 = array[i][j] + scores[i][j - 1];
+                        }
+
+                        if (j > 0 && zoj && scores[i - 2][j - 1] != 0)
+                        {
+                            a2 = array[i][j] + scores[i - 2][j - 1];
+                        }
+
+                        if (j < (m - 1) && !zoj && scores[i - 2][j + 1] != 0)
+                        {
+                            a3 = array[i][j] + scores[i - 2][j + 1];
+                        }
+
+                        scores[i][j] = max(a1, max(a2, a3));
+                    }
+                }
+            }
+        }
+    }
+
+    cout << endl;
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < m; ++j)
+        {
+            cout << scores[i][j] << "\t";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
     long long maxi = 0;
     for (int j = 0; j < m; ++j)
     {
-        if (scores[n-1][j] == -1)
-        {
-            start_game(n-1, j, 0);
-        }
-
         if (maxi < scores[n-1][j])
         {
             maxi = scores[n-1][j];

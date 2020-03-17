@@ -1,37 +1,15 @@
 #include <iostream>
 #include <vector>
-#include <limits>
+#include <algorithm>
 
 using namespace std;
 
-vector<vector<int>> tree;
-long maxi;
-
-void find(int r, int index, long sum, int depth)
-{
-    if (r == depth)
-    {
-        if (sum > maxi)
-        {
-            maxi = sum;
-        }
-    }
-    else if (index == 0)
-    {
-        find(r + 1, 0, sum + tree[r][0], depth);
-        find(r + 1, 1, sum + tree[r][1], depth);
-    }
-    else
-    {
-        find(r + 1, r, sum + tree[r][r], depth);
-        find(r + 1, r + 1, sum + tree[r][r + 1], depth);
-    }
-}
 
 int main()
 {
     int n;
     cin >> n;
+    vector<vector<int>> tree;
 
     while (n--)
     {
@@ -59,9 +37,17 @@ int main()
                 tree.push_back(move(row));
             }
 
-            maxi = numeric_limits<decltype (maxi)>::min();
-            find(1, 0, tree[0][0], t);
-            cout << maxi << endl;
+            reverse(tree.begin(), tree.end());
+
+            for (int j = 1; j < tree.size(); ++j)
+            {
+                for (int k = 0; k < tree[j].size(); ++k)
+                {
+                    tree[j][k] += max(tree[j - 1][k], tree[j-1][k+1]);
+                }
+            }
+
+            cout << tree[tree.size() - 1][0] << endl;
         }
     }
 
