@@ -62,7 +62,7 @@ int main()
                 }
                 else
                 {
-                    bool zoj = ((i >> 1) - 1) % 2 == 0;
+                    bool zoj = (((n - 1 - i) >> 1) + 1) % 2 == 1;
 
                     if (j == 0)
                     {
@@ -116,17 +116,6 @@ int main()
             }
         }
     }
-
-    cout << endl;
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < m; ++j)
-        {
-            cout << scores[i][j] << "\t";
-        }
-        cout << endl;
-    }
-    cout << endl;
 
     long long maxi = 0;
     for (int j = 0; j < m; ++j)
