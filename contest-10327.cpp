@@ -18,20 +18,17 @@ int main()
     while (n--)
     {
         bool boo = true;
+        t.clear();
         cin >> t;
         for (int i = 0; i < t.size() && boo; ++i)
         {
-            if (alphabet.find(t[i]) == alphabet.end())
+            if (alphabet.count(t[i]) == 0)
             {
                 boo = false;
-                cout << "No" << endl;
             }
         }
 
-        if (boo)
-        {
-            cout << "Yes" << endl;
-        }
+        cout << (boo ? "Yes" : "No") << endl;
     }
 
 
