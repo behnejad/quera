@@ -16,20 +16,21 @@ int main()
     {
         cout << 0 << " ";
     }
-
-    if (i == 1 && j == 1)
+    else if (i == 1 && j == 1)
     {
         cout << 1 << " ";
     }
-
-    for (long k = 1; k < j; ++k)
+    else
     {
-        if ((j % k) == i)
+        for (long k = 1; k < j; ++k)
         {
-            cout << k << " ";
+            if ((j % k) == i)
+            {
+                cout << k << " ";
+            }
         }
-    }
 
-    cout << endl;
+        cout << endl;
+    }
     return 0;
 }

@@ -1,17 +1,9 @@
 #include <iostream>
-#include <cmath>
 
-using namespace std;
-
-#define N 10
-
-int m1[N][N] = {0};
-int m2[N][N] = {0};
-int m3[N][N] = {0};
+#define N 30
 
 long long det(int n, int mat[N][N])
 {
-    double d = 0;
     long long c, subi, i, j, subj;
     int submat[N][N];
     if (n == 2)
@@ -41,40 +33,4 @@ long long det(int n, int mat[N][N])
         }
     }
     return d;
-}
-
-int main()
-{
-    int n;
-    cin >> n;
-
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < n; ++j)
-        {
-            cin >> m1[i][j];
-        }
-    }
-
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < n; ++j)
-        {
-            cin >> m2[i][j];
-        }
-    }
-
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < n; ++j)
-        {
-            for (int k = 0; k < n; ++k)
-            {
-                m3[i][k] += m1[i][j] * m2[j][k];
-            }
-        }
-    }
-
-    cout << (det(n, m3) % 2 == 1 ? "Danial" : "Farzad") << endl;
-    return 0;
 }

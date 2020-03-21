@@ -12,4 +12,4 @@ else:
         res += so / fac
         so *= x
         fac *= i + 1
-    print(("%.4f" % res)[:-1])
+    print(("%.6f" % res)[:-3])

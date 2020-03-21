@@ -7,7 +7,7 @@ n = int(n)
 res = 0;
 
 def fuc(i):
-    if i == 0:
+    if i == 0 or i == 1:
         return 1;
     res = 1
     while i > 0:
