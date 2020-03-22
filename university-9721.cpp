@@ -5,9 +5,9 @@ using namespace std;
 
 int main()
 {
-    vector<int> array;
     int n;
     cin >> n;
+    vector<int> array;
 
     while (n--)
     {
