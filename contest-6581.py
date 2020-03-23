@@ -1,0 +1,5 @@
+i = input().split()
+t = int(i[0])
+w = int(i[1])
+z = sum(2 ** x for x in range(w))
+print("%.4f" % (t / z * (2 ** (w - 1))))
