@@ -34,7 +34,7 @@ int main()
                         temp[k] = 0;
                         ++j;
                     }
-                    else if (temp[k] == '-')
+                    else
                     {
                         break;
                     }
@@ -49,7 +49,7 @@ int main()
                     {
                         map[k][j] = 0;
                     }
-                    else if (map[k][j] == '|')
+                    else
                     {
                         break;
                     }

@@ -7,30 +7,14 @@ int main()
     long i, j;
     cin >> i >> j;
 
-    if (i > j)
+    for (long k = 1; k < max(i, j); ++k)
     {
-        swap(i, j);
-    }
-
-    if (i == 0)
-    {
-        cout << 0 << " ";
-    }
-    else if (i == 1 && j == 1)
-    {
-        cout << 1 << " ";
-    }
-    else
-    {
-        for (long k = 1; k < j; ++k)
+        if ((i % k) == j)
         {
-            if ((j % k) == i)
-            {
-                cout << k << " ";
-            }
+            cout << k << " ";
         }
-
-        cout << endl;
     }
+
+    cout << endl;
     return 0;
 }
