@@ -6,18 +6,18 @@ using namespace std;
 
 bool isA(double x, double y)
 {
-    return abs(x - (int)x - y) <= 0.2;
+    return abs(x - (int)x - y) <= 2.0;
 }
 
 bool isB(double x, double y)
 {
-    return abs(x * x + x - y) <= 0.2;
+    return abs((x * x) + x - y) <= 2.0;
 }
 
 bool isC(double x, double y)
 {
     x = (x * x * x);
-    return abs(abs(1 - x) + x - y) <= 0.2;
+    return abs(abs(1 - x) + x - y) <= 2.0;
 }
 
 int main()
