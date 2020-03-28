@@ -3,9 +3,6 @@
 #include <string>
 
 using namespace std;
-#include <iostream>
-#include <queue>
-using namespace std;
 
 enum COLOR { RED, BLACK };
 
@@ -17,9 +14,6 @@ public:
 
     Node(int val) : val(val) {
         parent = left = right = NULL;
-
-        // Node is created during insertion
-        // Node is red at insertion
         color = RED;
     }
 

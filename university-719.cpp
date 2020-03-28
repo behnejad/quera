@@ -1,50 +1,51 @@
-// by Amirhossein Jeddi
 #include <iostream>
-#include <string>
+#include <limits>
 #include <vector>
-#include <algorithm>
-#include <math.h>
+
 using namespace std;
+
 #define ll long long
-const int MAX = 1000005;
-struct Point {
-	ll x, y;
-	ll xplusy;
-	ll xminusy;
-};
-Point a[MAX];
 
 int main()
 {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 	ll n;
-	cin >> n;
-	ll maxplus = -9999999, maxid = 0;
-	ll minplus = 9999999, minid = 0;
-	ll maxminues = -9999999, maxidm = 0;
-	ll minminues = 9999999, minidm = 0;
-	for (int i = 0; i < n; i++) {
-		cin >> a[i].x >> a[i].y;
-		if (a[i].x + a[i].y > maxplus) {
-			maxplus = a[i].x + a[i].y;
+    ll maxplus = numeric_limits<ll>::min(), maxid = 0;
+    ll minplus = numeric_limits<ll>::max(), minid = 0;
+    ll maxminues = numeric_limits<ll>::min(), maxidm = 0;
+    ll minminues = numeric_limits<ll>::max(), minidm = 0;
+    vector<pair<ll, ll>> points;
+
+    cin >> n;
+    for (int i = 0; i < n; ++i)
+    {
+        ll x, y;
+        cin >> x >> y;
+        points.emplace_back(x, y);
+
+        if (x + y > maxplus)
+        {
+            maxplus = x + y;
 			maxid = i;
 		}
-		else if (a[i].x + a[i].y < minplus) {
-			minplus = a[i].x + a[i].y;
+        else if (x + y < minplus)
+        {
+            minplus = x + y;
 			minid = i;
 		}
-		if (a[i].x - a[i].y > maxminues) {
-			maxminues = a[i].x - a[i].y;
+        if (x - y > maxminues)
+        {
+            maxminues = x - y;
 			maxidm = i;
 		}
-		else if (a[i].x - a[i].y < minminues) {
-			minminues = a[i].x - a[i].y;
+        else if (x - y < minminues)
+        {
+            minminues = x - y;
 			minidm = i;
 		}
 	}
-	//
-	ll a1 = abs(a[maxid].x - a[minid].x) + abs(a[maxid].y - a[minid].y);
-	ll a2 = abs(a[maxidm].x - a[minidm].x) + abs(a[maxidm].y - a[minidm].y);
+    ll a1 = abs(points[maxid].first - points[minid].first) + abs(points[maxid].second - points[minid].second);
+    ll a2 = abs(points[maxidm].first - points[minidm].first) + abs(points[maxidm].second - points[minidm].second);
 	cout << max(a1, a2);
 }
