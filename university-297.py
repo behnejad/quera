@@ -1,15 +1,7 @@
 x = int(input())
 n = int(input())
-
-fac = 1
-
-if n == 0:
-    print("1.000")
-else:
-    res = 1
-    so = x
-    for i in range(1, n):
-        res += so / fac
-        so *= x
-        fac *= i + 1
-    print(("%.6f" % res)[:-3])
+total = fact = 1
+for i in range(1, n):
+    fact *= i
+    total += (pow(x, i) / fact)
+print("{:.3f}".format(total))
