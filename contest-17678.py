@@ -18,11 +18,11 @@ for i in range(n):
         last_day = day
 
     if name not in day_user:
-        logs[-1][0] = logs[-1][0] + 1
+        logs[-1][0] += 1
         day_user.add(name)
 
     if name not in all_users:
-        logs[-1][1] = logs[-1][1] + 1
+        logs[-1][1] += 1
         all_users.add(name)
 
     all_logs[-1].add(name)
@@ -33,7 +33,7 @@ for i in all_logs[::-1]:
     for j in i:
         if j not in last_log:
             last_log.add(j)
-            logs[index][2] = logs[index][2] + 1
+            logs[index][2] += 1
     index -= 1
 
 for i in logs:
