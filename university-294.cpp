@@ -6,17 +6,15 @@ using namespace std;
 
 int main()
 {
-    long double a, b, c;
+    float a, b, c;
     cin >> a >> b >> c;
-    long double x, y;
-
-    cout << fixed << setprecision(3);
+    float x, y;
 
     if (a == 0 && b == 0)
     {
         cout << "IMPOSSBILE" << endl;
     }
-    else if ((a == 0 && c == 0) || (b == 0 && c == 0))
+    else if (c == 0 && (a == 0 || b == 0))
     {
         cout << "0.000" << endl;
     }
@@ -25,28 +23,38 @@ int main()
         if (a == 0)
         {
             x = (-c) / b;
-            cout << x << endl;
+            cout << fixed << setprecision(3) << x << endl;
         }
         else
         {
-            long double qrt = (b * b) - ((a * c) * 4);
+            float qrt = (b * b) - (a * c * 4);
             if (qrt < 0)
             {
                 cout << "IMPOSSIBLE" << endl;
             }
             else if (qrt == 0)
             {
-                x = (-b) / (a * 2);
-                cout << x << endl;
+                x = ((-b) / a) / 2;
+                cout << fixed << setprecision(3) << x << endl;
             }
             else
             {
-                x = ((-b) - sqrtl(qrt)) / (a * 2);
-                y = ((-b) + sqrtl(qrt)) / (a * 2);
-                cout << x << endl << y << endl;
+                x = ((-b) - sqrt(qrt)) / (a * 2);
+                y = ((-b) + sqrt(qrt)) / (a * 2);
+                if (x < y)
+                {
+                    cout << fixed << setprecision(3) << x << endl
+                         << fixed << setprecision(3) << y << endl;
+                }
+                else
+                {
+                    cout << fixed << setprecision(3) << y << endl
+                         << fixed << setprecision(3) << x << endl;
+                }
             }
         }
     }
+
 
     return 0;
 }
