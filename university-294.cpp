@@ -1,38 +1,45 @@
 #include <iostream>
 #include <iomanip>
+#include <limits>
 #include <cmath>
 
 using namespace std;
 
 int main()
 {
-    float a, b, c;
+    double ep = numeric_limits<double>::epsilon();
+    double a, b, c;
     cin >> a >> b >> c;
-    float x, y;
+    double x, y;
 
-    if (a == 0 && b == 0)
+    if (fabs(a) < ep && fabs(b) < ep)
     {
         cout << "IMPOSSBILE" << endl;
     }
-    else if (c == 0 && (a == 0 || b == 0))
+    else if (fabs(c) < ep && (fabs(a) < ep || fabs(b) < ep))
     {
         cout << "0.000" << endl;
     }
     else
     {
-        if (a == 0)
+        if (fabs(a) < ep)
         {
             x = (-c) / b;
             cout << fixed << setprecision(3) << x << endl;
         }
         else
         {
-            float qrt = (b * b) - (a * c * 4);
-            if (qrt < 0)
+            double qrt = (b * b) - (a * c * 4);
+            if (qrt < 0.0)
             {
                 cout << "IMPOSSIBLE" << endl;
             }
-            else if (qrt == 0)
+            else if (fabs(qrt) < ep)
+            {
+                x = ((-b) / a) / 2;
+                cout << fixed << setprecision(3) << x << endl;
+            }
+            else if (fabs(sqrt(qrt)) < ep)
             {
                 x = ((-b) / a) / 2;
                 cout << fixed << setprecision(3) << x << endl;
