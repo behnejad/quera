@@ -3,33 +3,38 @@
 
 using namespace std;
 
-long long maxi = 0;
-set<long long> a, b;
+typedef long double myL;
 
-bool check(long long i)
+myL maxi = 0;
+set<myL> a, b;
+
+bool check(myL i)
 {
     if (i > maxi)
     {
         return false;
     }
 
-    if (a.count(i << 1))
+    myL t = i * 2;
+    if (a.count(t))
     {
+        a.erase(t);
         return true;
     }
 
-    if (a.count((i << 1) + 1))
+    if (a.count(t + 1))
     {
+        a.erase(t + 1);
         return true;
     }
 
-    return check(i << 1) || check((i << 1) + 1);
+    return check(t) || check(t + 1);
 }
 
 int main()
 {
     int n;
-    long long temp;
+    myL temp;
     cin >> n;
 
     for (int i = 0; i < n; ++i)
