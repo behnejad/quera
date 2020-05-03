@@ -44,7 +44,7 @@ int main()
     }
 
     bool found = false;
-    for (int i = 0; i < sizeof(times) - 15 * 60; ++i)
+    for (size_t i = 0; i <= (24 * 60 * 60) - 15 * 60; ++i)
     {
         if (memcmp(times + i, correct, 15 * 60) == 0)
         {

@@ -5,29 +5,34 @@ using namespace std;
 
 int main()
 {
-    long long n, q, t, k;
+    unsigned long long n, q, i, j, x;
     cin >> n >> q;
-    queue<long long> array[n];
+    queue<unsigned long long> array[n];
     while (q--)
     {
-        cin >> t;
-        if (t == 1)
+        cin >> x;
+        if (x == 1)
         {
-            cin >> t;
-            for (queue<long long> & i : array)
+            cin >> x;
+            for (queue<unsigned long long> & i : array)
             {
-                i.push(t);
+                i.push(x);
             }
         }
-        else if (t == 2)
+        else if (x == 2)
         {
-            cin >> t >> k;
+            cin >> i >> j;
             n = 0;
-            while (k--)
+            --i;
+            if (j != 0)
             {
-                n += array[t - 1].front();
-                array[t - 1].pop();
+                while (j-- && array[i].size())
+                {
+                    n += array[i].front();
+                    array[i].pop();
+                }
             }
+
             cout << n << endl;
         }
     }
