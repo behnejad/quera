@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Find Treasure</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <style></style>
+  </head>
+
+  <body bgcolor="#E6E6FA">
+    <div id="level"></div>
+    <div id="square"></div>
+
+    <script>
+      window.onload = () => {
+        fetch('./levels.json')
+          .then(res => res.json())
+          .then(json => json.levels)
+          .then(resLevels => {
+            levels = resLevels;
+            start();
+          });
+      };
+      let levels = [];
+      function start() {
+        const levelElement = document.getElementById('level');
+        const squareElement = document.getElementById('square');
+        const squareRect = squareElement.getBoundingClientRect();
+        let currentLevel = 0,
+          levelWinPoint;
+        let distance, mousePosition, isWon;
+        setCurrentLevelWinPoint();
+
+        function incrementLevel() {
+          currentLevel++;
+          currentLevel < levels.length
+            ? setCurrentLevelWinPoint()
+            : (isWon = true);
+        }
+        function setCurrentLevelWinPoint() {
+          levelWinPoint = {
+            x: levels[currentLevel][0],
+            y: levels[currentLevel][1]
+          };
+        }
+        window.addEventListener('mousemove', e => {
+          mousePosition = {
+            x: e.clientX,
+            y: e.clientY
+          };
+          distance = getDistance(getMousePositionInLevel(), levelWinPoint);
+          if (distance < 10) incrementLevel();
+          render();
+        });
+
+        function mouseIsInLevel() {
+          return (
+            mousePosition.x < squareRect.right &&
+            mousePosition.x > squareRect.left &&
+            mousePosition.y < squareRect.bottom &&
+            mousePosition.y > squareRect.top
+          );
+        }
+
+        function getMousePositionInLevel() {
+          return {
+            x: mousePosition.x - squareRect.left,
+            y: mousePosition.y - squareRect.top
+          };
+        }
+
+        function getDistance(a, b) {
+          return Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
+        }
+
+        function getColorForDistance(distance) {
+          const c = 255 - distance / 2;
+          return `rgb(${c}, ${c}, ${c})`;
+        }
+
+        function render() {
+          const isActive = mouseIsInLevel();
+          const levelText = isWon ? 'You won!' : `Level ${currentLevel}`;
+          const color = isWon
+            ? '#fff'
+            : isActive
+            ? getColorForDistance(distance)
+            : '#000';
+          renderLevelText(levelText);
+          renderLevelSquare(color);
+        }
+
+        function renderLevelSquare(color) {
+          squareElement.style = `background-color: ${color}`;
+        }
+        function renderLevelText(text) {
+          levelElement.innerText = text;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -9,7 +9,6 @@ for i in range(n):
     i = input().split()
     day = int(i[2])
     name = i[-2]
-    time = i[5]
 
     if last_day != day:
         logs.append([0, 0, 0])

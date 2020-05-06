@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+}
+
+#square {
+    width: 256px;
+    height: 256px;
+    background-color: #000000;
+    position: absolute;
+    left: 200px;
+    top: 200px;
+}
+
+#level {
+    position: absolute;
+
+    left: 200px;
+    top: 180px;
+}
+
+
