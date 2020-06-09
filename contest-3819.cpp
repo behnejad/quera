@@ -4,27 +4,26 @@
 using namespace std;
 
 double r, h, k;
-int x1, y1, x2, y2, x3, y3;
 
-void findCircle()
+void findCircle(int x1, int y1, int x2, int y2, int x3, int y3)
 {
-    int x12 = x1 - x2;
-    int x13 = x1 - x3;
+    double x12 = x1 - x2;
+    double x13 = x1 - x3;
 
-    int y12 = y1 - y2;
-    int y13 = y1 - y3;
+    double y12 = y1 - y2;
+    double y13 = y1 - y3;
 
-    int y31 = y3 - y1;
-    int y21 = y2 - y1;
+    double y31 = y3 - y1;
+    double y21 = y2 - y1;
 
-    int x31 = x3 - x1;
-    int x21 = x2 - x1;
+    double x31 = x3 - x1;
+    double x21 = x2 - x1;
 
-    int sx13 = pow(x1, 2) - pow(x3, 2);
-    int sy13 = pow(y1, 2) - pow(y3, 2);
+    double sx13 = pow(x1, 2) - pow(x3, 2);
+    double sy13 = pow(y1, 2) - pow(y3, 2);
 
-    int sx21 = pow(x2, 2) - pow(x1, 2);
-    int sy21 = pow(y2, 2) - pow(y1, 2);
+    double sx21 = pow(x2, 2) - pow(x1, 2);
+    double sy21 = pow(y2, 2) - pow(y1, 2);
 
     double f = ((sx13) * (x12)
              + (sy13) * (x12)
@@ -51,7 +50,35 @@ int main()
     int n;
     cin >> n;
 
+    int x1, y1, x2, y2, x3, y3;
+    cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
 
+    n -= 3;
+
+    findCircle(x1, y1, x2, y2, x3, y3);
+
+    if ((h - (int)h) != 0 || (k - (int)k) != 0)
+    {
+        cout << "No Answer" << endl;
+    }
+    else
+    {
+        int x, y;
+
+        while (n--)
+        {
+            cin >> x >> y;
+            x -= h;
+            y -= k;
+            if (sqrt((x * x) + (y * y)) != r)
+            {
+                cout << "No Answer" << endl;
+                return 0;
+            }
+        }
+
+        cout << (int)h << " " << (int) k << endl;
+    }
 
     return 0;
 }
