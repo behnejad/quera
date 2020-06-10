@@ -4,19 +4,21 @@
 
 using namespace std;
 
+#define N 4
+
 int main()
 {
     int t, n, q;
     cin >> n >> q;
     t = n;
 
-    long b[4], temp;
-    map<long, set<int>> index[4];
-    map<long, set<int>> * array[4];
+    long b[N], temp;
+    map<long, set<int>> index[N];
+    map<long, set<int>> * array[N];
 
     while (n--)
     {
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < N; ++i)
         {
             cin >> b[i];
             if (index[i].count(b[i]) == 0)
@@ -30,7 +32,7 @@ int main()
     while (q--)
     {
         int c = 0;
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < N; ++i)
         {
             cin >> temp;
             if (temp != -1)

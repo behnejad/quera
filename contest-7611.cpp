@@ -14,7 +14,8 @@ int main()
         cin >> a[i];
     }
 
-    int t, j, rem;
+    long long t, j, rem;
+
     for (int i = 0; i < n; ++i)
     {
         t = 0;
