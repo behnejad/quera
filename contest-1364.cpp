@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector>
+#include <set>
 #include <string>
 #include <sstream>
 
@@ -18,7 +18,7 @@ int main()
     int n;
     cline >> n;
 
-    vector<string> words(n);
+    set<string> words;
 
     getline(cin, temp);
     cline.clear();
@@ -26,7 +26,8 @@ int main()
 
     for (int i = 0; i < n; ++i)
     {
-        cline >> words[i];
+        cline >> temp;
+        words.insert(temp);
     }
 
     getline(cin, temp);
@@ -39,7 +40,7 @@ int main()
 
         int count = 0;
 
-        for (string & x : words)
+        for (const string & x : words)
         {
             bool found = false;
 

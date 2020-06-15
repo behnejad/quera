@@ -23,7 +23,7 @@ int main()
             long long k = n - i;
             long long k2 = k * k;
             long long i2k2 = (j + k2) * (j + k2);
-            long long c2 = i2k2/ (k2 << 2);
+            long long c2 = i2k2 / (k2 << 2);
             long double c = sqrt(c2);
 
             if (c == (long long) c)
