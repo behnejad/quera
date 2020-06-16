@@ -14,8 +14,7 @@ long long mergeSort(int arr[], int array_size)
 
 long long _mergeSort(int arr[], int temp[], int left, int right)
 {
-    int mid;
-    long long inv_count = 0;
+    long long mid, inv_count = 0;
     if (right > left)
     {
         mid = (right + left) / 2;
@@ -28,7 +27,7 @@ long long _mergeSort(int arr[], int temp[], int left, int right)
 
 long long merge(int arr[], int temp[], int left, int mid, int right)
 {
-    int i, j, k;
+    long long i, j, k;
     long long inv_count = 0;
 
     i = left;
