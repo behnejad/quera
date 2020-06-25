@@ -1,7 +1,10 @@
 package in.nimbo;
 
+import in.nimbo.file.MediaFile;
 import in.nimbo.file.NimboFile;
+import in.nimbo.preview.HasPreview;
 
+import javax.print.attribute.standard.Media;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -65,13 +68,17 @@ public class FileRepository {
      * Scans all files with {@link FileScanner}. Removes malformed files and return storage to their owners.
      */
     public void scan() {
+        Set<NimboFile> removes = new HashSet<>();
         for (NimboFile i : files) {
             try {
                 scanner.scanFile(i);
             } catch (FileScanner.MalformedFileException e) {
                 storageRepository.increaseStorageOfUser(i.getOwner(), i.getSize());
-                files.remove(i);
+                removes.add(i);
             }
+        }
+        for (NimboFile i : removes) {
+            files.remove(i);
         }
     }
 
@@ -82,8 +89,9 @@ public class FileRepository {
      * @return array of sorted files.
      */
     public NimboFile[] sort(Comparator<NimboFile> comparator) {
-        // Your Code
-        return null;
+        ArrayList<NimboFile> res = new ArrayList<>(files);
+        res.sort(comparator);
+        return (NimboFile[]) res.toArray();
     }
 
     /**
@@ -93,7 +101,7 @@ public class FileRepository {
      */
     public boolean isPreviewable(NimboFile file) {
         // Your Code
-        return false;
+        return file instanceof HasPreview;
     }
 
     /**
@@ -103,8 +111,17 @@ public class FileRepository {
      * @return one of longest media files wrapped in Optional if exists or Optional.empty()
      */
     public Optional<NimboFile> findLongestMediaInDirectory(String directory) {
-        // Your Code
-        return Optional.empty();
+        int duration = -1;
+        NimboFile large = null;
+        for (NimboFile i : files) {
+            if (i.getDirectory().equals(directory) && i instanceof MediaFile) {
+                if (((MediaFile) i).getDuration() > duration) {
+                    large = i;
+                    duration = ((MediaFile) i).getDuration();
+                }
+            }
+        }
+        return (large == null) ? Optional.empty() : Optional.of(large);
     }
 
     /**
@@ -114,6 +131,10 @@ public class FileRepository {
      * @param function functions which will be applied to files
      */
     public void applyToAllByFilter(Predicate<NimboFile> filter, Consumer<NimboFile> function) {
-        // Your Code
+        for (NimboFile i : files) {
+            if (filter.test(i)) {
+                function.accept(i);
+            }
+        }
     }
 }
