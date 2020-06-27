@@ -4,7 +4,6 @@ import in.nimbo.file.MediaFile;
 import in.nimbo.file.NimboFile;
 import in.nimbo.preview.HasPreview;
 
-import javax.print.attribute.standard.Media;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -89,9 +88,13 @@ public class FileRepository {
      * @return array of sorted files.
      */
     public NimboFile[] sort(Comparator<NimboFile> comparator) {
-        ArrayList<NimboFile> res = new ArrayList<>(files);
-        res.sort(comparator);
-        return (NimboFile[]) res.toArray();
+        if (files.size() != 0) {
+            NimboFile[] a = (NimboFile[]) files.toArray();
+            Arrays.sort(a, comparator);
+            return a;
+        } else {
+            return new NimboFile[0];
+        }
     }
 
     /**
