@@ -1,6 +1,12 @@
 public class SpamDetector {
 
     public SpamType[] detectSpams(Message[] messages) {
+		if (messages == null) {
+			return null;
+		}
+		if (messages.length == 0) {
+			return new SpamType[0];
+		}
         SpamType[] res = new SpamType[messages.length];
 
         for (int i = 0; i < messages.length; ++i) {

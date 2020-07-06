@@ -88,6 +88,9 @@ public class FileRepository {
      * @return array of sorted files.
      */
     public NimboFile[] sort(Comparator<NimboFile> comparator) {
+		if (files == null) {
+			return null;
+		}
         if (files.size() != 0) {
             NimboFile[] a = (NimboFile[]) files.toArray();
             Arrays.sort(a, comparator);
