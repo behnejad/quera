@@ -16,37 +16,59 @@ if __name__ == '__main__':
             a109 = User('a109', 'Elahe', 29)
 
             return [
-                TrafficUsage(a100, True, False, 100, '97/04/01'), TrafficUsage(a100, False, True, 150, '97/04/01'),
-                TrafficUsage(a100, False, False, 100, '97/04/03'), TrafficUsage(a100, True, True, 100, '97/04/04'),
-                TrafficUsage(a100, True, False, 100, '97/06/01'), TrafficUsage(a100, False, True, 150, '97/06/01'),
+                TrafficUsage(a100, True, False, 100, '97/04/01'), 
+                TrafficUsage(a100, False, True, 150, '97/04/01'),
+                TrafficUsage(a100, False, False, 100, '97/04/03'), 
+                TrafficUsage(a100, True, True, 100, '97/04/04'),
+                TrafficUsage(a100, True, False, 100, '97/06/01'), 
+                TrafficUsage(a100, False, True, 150, '97/06/01'),
                 
-                TrafficUsage(a101, True, False, 90, '97/04/01'), TrafficUsage(a101, False, True, 100, '97/04/01'),
-                TrafficUsage(a101, True, False, 90, '97/05/01'), TrafficUsage(a101, False, True, 100, '97/05/01'),
+                TrafficUsage(a101, True, False, 90, '97/04/01'), 
+                TrafficUsage(a101, False, True, 100, '97/04/01'),
+                TrafficUsage(a101, True, False, 90, '97/05/01'), 
+                TrafficUsage(a101, False, True, 100, '97/05/01'),
                 
-                TrafficUsage(a102, True, False, 90, '97/04/01'), TrafficUsage(a102, False, True, 100, '97/04/01'),
-                TrafficUsage(a102, True, False, 90, '97/05/01'), TrafficUsage(a102, False, True, 100, '97/05/01'),
+                TrafficUsage(a102, True, False, 90, '97/04/01'), 
+                TrafficUsage(a102, False, True, 100, '97/04/01'),
+                TrafficUsage(a102, True, False, 90, '97/05/01'), 
+                TrafficUsage(a102, False, True, 100, '97/05/01'),
                 
-                TrafficUsage(a103, True, False, 100, '97/04/01'), TrafficUsage(a103, False, True, 100, '97/04/01'),
-                TrafficUsage(a103, True, False, 100, '97/05/01'), TrafficUsage(a103, False, True, 100, '97/05/01'),
+                TrafficUsage(a103, True, False, 100, '97/04/01'), 
+                TrafficUsage(a103, False, True, 100, '97/04/01'),
+                TrafficUsage(a103, True, False, 100, '97/05/01'), 
+                TrafficUsage(a103, False, True, 100, '97/05/01'),
                 
-                TrafficUsage(a104, True, False, 100, '97/04/01'), TrafficUsage(a104, False, True, 100, '97/04/01'),
-                TrafficUsage(a104, True, False, 100, '97/05/01'), TrafficUsage(a104, False, True, 100, '97/05/01'),
+                TrafficUsage(a104, True, False, 100, '97/04/01'), 
+                TrafficUsage(a104, False, True, 100, '97/04/01'),
+                TrafficUsage(a104, True, False, 100, '97/05/01'), 
+                TrafficUsage(a104, False, True, 100, '97/05/01'),
                 
-                TrafficUsage(a105, True, False, 100, '97/04/01'), TrafficUsage(a105, False, True, 100, '97/04/01'),
-                TrafficUsage(a105, True, False, 100, '97/05/01'), TrafficUsage(a105, False, True, 100, '97/05/01'),
-                TrafficUsage(a105, True, False, 100, '97/06/01'), TrafficUsage(a105, False, True, 100, '97/06/01'),
+                TrafficUsage(a105, True, False, 100, '97/04/01'), 
+                TrafficUsage(a105, False, True, 100, '97/04/01'),
+                TrafficUsage(a105, True, False, 100, '97/05/01'), 
+                TrafficUsage(a105, False, True, 100, '97/05/01'),
+                TrafficUsage(a105, True, False, 100, '97/06/01'), 
+                TrafficUsage(a105, False, True, 100, '97/06/01'),
                 
-                TrafficUsage(a106, True, False, 100, '97/04/01'), TrafficUsage(a106, False, True, 100, '97/04/01'),
-                TrafficUsage(a106, True, False, 100, '97/05/01'), TrafficUsage(a106, False, True, 100, '97/05/01'),
+                TrafficUsage(a106, True, False, 100, '97/04/01'), 
+                TrafficUsage(a106, False, True, 100, '97/04/01'),
+                TrafficUsage(a106, True, False, 100, '97/05/01'), 
+                TrafficUsage(a106, False, True, 100, '97/05/01'),
                 
-                TrafficUsage(a107, True, False, 100, '97/04/01'), TrafficUsage(a107, False, True, 100, '97/04/01'),
-                TrafficUsage(a107, True, False, 100, '97/05/01'), TrafficUsage(a107, False, True, 100, '97/05/01'),
+                TrafficUsage(a107, True, False, 100, '97/04/01'), 
+                TrafficUsage(a107, False, True, 100, '97/04/01'),
+                TrafficUsage(a107, True, False, 100, '97/05/01'), 
+                TrafficUsage(a107, False, True, 100, '97/05/01'),
                 
-                TrafficUsage(a108, True, False, 100, '97/04/01'), TrafficUsage(a108, False, True, 100, '97/04/01'),
-                TrafficUsage(a108, True, False, 100, '97/05/01'), TrafficUsage(a108, False, True, 100, '97/05/01'),
+                TrafficUsage(a108, True, False, 100, '97/04/01'), 
+                TrafficUsage(a108, False, True, 100, '97/04/01'),
+                TrafficUsage(a108, True, False, 100, '97/05/01'), 
+                TrafficUsage(a108, False, True, 100, '97/05/01'),
                 
-                TrafficUsage(a109, True, False, 400, '97/04/01'), TrafficUsage(a109, False, True, 200, '97/04/01'),
-                TrafficUsage(a109, True, False, 100, '97/05/01'), TrafficUsage(a109, False, True, 300, '97/05/01'),
+                TrafficUsage(a109, True, False, 400, '97/04/01'), 
+                TrafficUsage(a109, False, True, 200, '97/04/01'),
+                TrafficUsage(a109, True, False, 100, '97/05/01'), 
+                TrafficUsage(a109, False, True, 300, '97/05/01'),
             ]
 
     service = TrafficUsageService(traffic_usage_dao=SampleTrafficUsageDao())

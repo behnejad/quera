@@ -14,7 +14,7 @@ class TrafficUsageService:
             if x.date.startswith(s):
                 value = 0 if x.internal else x.usage
                 if x.user in active:
-                    active[x.user] = active[x.user] + value
+                    active[x.user] += value
                 else:
                     active[x.user] = value
         if len(active) == 0:
@@ -29,7 +29,7 @@ class TrafficUsageService:
         index = (9 * (size - 1)) // 10
         for i in active:
             usage_use = active[i]
-            for j in range(index + 1, len(usage)):
+            for j in range(index + 1, size):
                 if (usage_use == usage[j]):
                     res.append(i)
         return res
@@ -50,8 +50,4 @@ class TrafficUsageService:
                     night[user] += x.usage
                 else:
                     day[user] += x.usage
-        for x in res:
-            if night[x] <= day[x]:
-                res.remove(x)
-                print(x.name)
-        return res
+        return filter(lambda x: night[x] > day[x], res)
