@@ -21,24 +21,22 @@ table {
     border-spacing: 0;
     width: 100%;
     height: 100%;
-    display:table;
 }
 
 td {
     padding: 0;
 }
-tr {
-  display:table-row;
-  height:100%;
-}
-td {
-  display:table-cell;
-}
+
 
 #app {
     background-color: #EEE;
     color: #444;
     text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     margin: auto;
     height: 70%;
     min-height: 280px;
@@ -70,9 +68,13 @@ td {
     float: left;
 }
 
-#key {
-    height: 100%;
+.key {
+    height: 100% !important;
     width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #ops {
@@ -81,3 +83,6 @@ td {
     float: right;
 }
 
+#ops td {
+    width: 50%;
+}
