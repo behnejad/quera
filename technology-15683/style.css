@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    font-size: 16px;
+}
+
+.key {
+    font-size: 1.5em;
+}
+
+@font-face {
+  font-family: RobotoCondensed;
+  src: url(RobotoCondensed.woff);
+}
+
+@font-face {
+  font-family: DigitalNumbers;
+  src: url(DigitalNumbers.woff);
+}
+
+table {
+    border-spacing: 0;
+    width: 100%;
+    height: 100%;
+}
+
+td {
+    padding: 0;
+}
+
+
+#app {
+    background-color: #EEE;
+    color: #444;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 70%;
+    min-height: 280px;
+    width: 80%;
+    min-width: 580px;
+}
+
+#result {
+    text-align: right;
+    font-size: 3.5em;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: DigitalNumbers;
+}
+
+#keypad {
+    height: 72%;
+    width: 100%;
+    color: #DDD;
+    font-family: "RobotoCondensed";
+}
+
+#nums {
+    height: 100%;
+    width: 54%;
+    float: left;
+}
+
+.key {
+    height: 100% !important;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ops {
+    height: 100%;
+    width: 46%;
+    float: right;
+}
+
+#ops td {
+    width: 50%;
+}

@@ -1,8 +1,7 @@
-from re import compile as c
+import bs4
 
-a = c("<\s*a[^>]*>(.*?)<\s*/\s*a>")
 
 def process(name):
-    global a
-    data = open(name).read()
-    return len(a.findall(data))
+    with open(name) as f:
+        soup = bs4.BeautifulSoup(f)
+    return len([link['href'] for link in soup('a') if 'href' in link.attrs])
