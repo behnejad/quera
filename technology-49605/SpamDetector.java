@@ -36,7 +36,8 @@ public class SpamDetector {
                 if ((send.charAt(j) >= '0' && send.charAt(j) <= '9') ||
                         (send.charAt(j) >= 'a' && send.charAt(j) <= 'z') ||
                         (send.charAt(j) >= 'A' && send.charAt(j) <= 'Z') ||
-                        send.charAt(j) == ' ' || send.charAt(j) == '\t') {
+                        send.charAt(j) == ' ' || send.charAt(j) == '\t' || 
+						send.charAt(j) == '\n') {
                 } else {
                     ++sender_number_count;
                 }
