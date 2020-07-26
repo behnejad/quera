@@ -12,8 +12,7 @@ int main()
     int n, m, s;
     cin >> n >> m >> s;
 
-    if ((n == 0 || m == 0 || s > (n * m)) ||
-            (is_even(n) && is_even(m) && is_odd(s)) ||
+    if ((is_even(n) && is_even(m) && is_odd(s)) ||
             (m == 1 && is_even(n) && is_odd(s)) ||
             (n == 1 && is_even(m) && is_odd(s)))
     {
@@ -137,6 +136,7 @@ int main()
     {
         cout << x << endl;
     }
+    cout << endl;
 
     return 0;
 }
