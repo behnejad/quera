@@ -70,9 +70,10 @@ int main()
     {
         int middle = (m >> 1);
 
+        int k = 0;
         if (is_odd(s))
         {
-            map[n - 1][middle] = 'T';
+            map[k++][middle] = 'T';
             --s;
         }
 
@@ -88,17 +89,17 @@ int main()
 
         for (int i = 0; i < n && s; ++i)
         {
-            map[i][middle] = 'T';
+            map[k++][middle] = 'T';
             --s;
         }
     }
     else if (is_odd(n))
     {
         int middle = (n >> 1);
-
+        int k = 0;
         if (is_odd(s))
         {
-            map[middle][m - 1] = 'T';
+            map[middle][k++] = 'T';
             --s;
         }
 
@@ -114,7 +115,7 @@ int main()
 
         for (int i = 0; i < m && s; ++i)
         {
-            map[middle][i] = 'T';
+            map[middle][k++] = 'T';
             --s;
         }
     }
@@ -136,7 +137,6 @@ int main()
     {
         cout << x << endl;
     }
-    cout << endl;
 
     return 0;
 }
