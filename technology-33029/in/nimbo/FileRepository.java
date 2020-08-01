@@ -90,11 +90,12 @@ public class FileRepository {
     public NimboFile[] sort(Comparator<NimboFile> comparator) {
 		if (files == null) {
 			return null;
-		}
-        if (files.size() != 0) {
-            NimboFile[] a = (NimboFile[]) files.toArray();
-            Arrays.sort(a, comparator);
-            return a;
+		} else if (files.size() != 0) {
+            List<NimboFile> sortedList = new ArrayList<>(files);
+            if (comparator != null) {
+                Collections.sort(sortedList, comparator);
+            }
+            return (NimboFile[]) sortedList.toArray();
         } else {
             return new NimboFile[0];
         }
