@@ -3,4 +3,7 @@ CONFIG += console c++17 <standard>
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES +=
+CCFLAG += -fpermissive
+
+SOURCES += \
+    62989.cpp
