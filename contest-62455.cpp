@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <vector>
 
 using namespace std;
 
@@ -22,18 +23,23 @@ int main()
         }
         else
         {
-            items[t] = 1;
+            items.emplace(t, 1);
         }
     }
 
+    vector<pair<int, int>> a(items.size());
+    int i = 0;
     for (pair<int, int> x : items)
     {
-        for (pair<int, int> y : items)
+        a[i] = x;
+        ++i;
+    }
+
+    for (i = a.size() - 1; i >= 0; --i)
+    {
+        for(int j = i; j >= 0; --j)
         {
-            if (x.first >= y.first)
-            {
-                res += ((ull) x.second) * ((ull) y.second) * ((ull) (x.first / y.first));
-            }
+            res += ((ull) a[i].second) * ((ull) a[j].second) * ((ull) (a[i].first / a[j].first));
         }
     }
 
