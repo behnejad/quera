@@ -5,4 +5,5 @@ CONFIG -= qt
 
 CCFLAG += -fpermissive
 
-SOURCES +=
+SOURCES += \
+    contest-44072.cpp
