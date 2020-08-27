@@ -53,7 +53,7 @@ void find(int index, int n, int i, int k)
     }
 }
 
-int main()
+int main1()
 {
     int n, k;
     int max = numeric_limits<int>::min();
@@ -89,6 +89,44 @@ int main()
         scores.resize(k);
         find(0, n, 0, k);
         cout << total_min << endl;
+    }
+
+    return 0;
+}
+
+int main()
+{
+    int n, k, t;
+    int max = numeric_limits<int>::min();
+    int mi = numeric_limits<int>::max();
+
+    cin >> n >> k;
+    for (int i = 0; i < n; ++i)
+    {
+        cin >> t;
+        a.push_back(t);
+
+        if (max < t)
+        {
+            max = t;
+        }
+        if (mi > t)
+        {
+            mi = t;
+        }
+    }
+
+    if (k == 1)
+    {
+        cout << max << endl;
+    }
+    else if (k >= 3)
+    {
+        cout << mi << endl;
+    }
+    else
+    {
+        cout << min(a[0], a[n - 1]) << endl;
     }
 
     return 0;
