@@ -1,67 +1,58 @@
 #include <iostream>
 #include <vector>
-#include <limits>
+#include <algorithm>
 
 using namespace std;
+
+typedef unsigned long long ull;
 
 int main()
 {
     int n;
     cin >> n;
-    auto * items = new unsigned long long[n];
-    vector<unsigned long long> j;
-    unsigned long long min = numeric_limits<unsigned long long>::max(), sum = 0, t;
+
+    if (n == 1)
+    {
+        cout << 1 << endl;
+        return 0;
+    }
+
+    vector<ull> a(n);
 
     for (int i = 0; i < n; ++i)
     {
-        cin >> t;
-        if (min > t)
-        {
-            min = t;
-        }
-        items[i] = t;
+        cin >> a[i];
     }
 
-    if (min != 1)
+    ull gcd = __gcd(a[0], a[1]);
+
+    for (int i = 2; i < n; ++i)
     {
-        t = 2;
-        while (t <= min)
+        if (gcd == 1)
         {
-            if (min % t == 0)
-            {
-                j.push_back(t);
-            }
-
-            ++t;
+            break;
         }
-
-        for (auto i : j)
+        else
         {
-            bool dividable = true;
-            for (int k = 0; k < n && dividable; ++k)
-            {
-                if (items[k] % i != 0)
-                {
-                    dividable = false;
-                }
-            }
-
-            if (dividable)
-            {
-                for (int k = 0; k < n; ++k)
-                {
-                    items[k] /= i;
-                }
-            }
+            gcd = __gcd(gcd, a[i]);
         }
     }
 
-    for (int k = 0; k < n; ++k)
+
+    ull sum = 0;
+    if (gcd != 1)
     {
-        sum += items[k];
+        for (ull & x : a)
+        {
+            x /= gcd;
+        }
+    }
+
+    for (ull x : a)
+    {
+        sum += x;
     }
 
     cout << sum << endl;
-    delete[] items;
     return 0;
 }
