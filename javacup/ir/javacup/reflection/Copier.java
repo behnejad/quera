@@ -15,14 +15,11 @@ public class Copier {
 		if (names != null && names.length != 0) {
 			for(String fieldName : names) {
 				try {
-					Field f = o1.getClass().getDeclaredField(fieldName);
-					Field t = o2.getClass().getDeclaredField(fieldName);
-					f.setAccessible(true);
-					t.setAccessible(true);
-					t.set(t, f);
-//					Method i = o1.getClass().getMethod("get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1));
-//					Method j = o2.getClass().getMethod("set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1), ia.getType());
-//					j.invoke(i.invoke(null));
+					String fi = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+					Field t1 = o1.getClass().getDeclaredField(fieldName);
+					Method f1 = o1.getClass().getMethod("get" + fi, null);
+					Method f2 = o2.getClass().getMethod("set" + fi, t1.getType());
+					f2.invoke(o2, f1.invoke(o1));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
