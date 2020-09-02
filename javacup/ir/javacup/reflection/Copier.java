@@ -24,6 +24,18 @@ public class Copier {
 					e.printStackTrace();
 				}
 			}
+		} else {
+			for(Field field : o1.getClass().getDeclaredFields()) {
+				try {
+					String fieldName = field.getName();
+					String fi = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+					Method f1 = o1.getClass().getMethod("get" + fi, null);
+					Method f2 = o2.getClass().getMethod("set" + fi, field.getType());
+					f2.invoke(o2, f1.invoke(o1));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
     }
 
