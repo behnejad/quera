@@ -67,8 +67,8 @@ public class Player {
 				return new BoardCell(0, i);
 			}
 		}
-		if (state[0][0].equals(mark) && state[1][1].equals(mark) && state[2][0].equals("-")) {
-			return new BoardCell(2, 0);
+		if (state[0][0].equals(mark) && state[1][1].equals(mark) && state[2][2].equals("-")) {
+			return new BoardCell(2, 2);
 		}
 		if (state[1][1].equals(mark) && state[2][2].equals(mark) && state[0][0].equals("-")) {
 			return new BoardCell(0, 0);
@@ -82,8 +82,8 @@ public class Player {
 		if (state[2][0].equals(mark) && state[0][2].equals(mark) && state[1][1].equals("-")) {
 			return new BoardCell(1, 1);
 		}
-		if (state[0][2].equals(mark) && state[1][1].equals(mark) && state[2][2].equals("-")) {
-			return new BoardCell(2, 2);
+		if (state[0][2].equals(mark) && state[1][1].equals(mark) && state[2][0].equals("-")) {
+			return new BoardCell(2, 0);
 		}
 
 		mark = (this.mark == PlayerMark.X) ? "O" : "X";
@@ -107,8 +107,8 @@ public class Player {
 				return new BoardCell(0, i);
 			}
 		}
-		if (state[0][0].equals(mark) && state[1][1].equals(mark) && state[2][0].equals("-")) {
-			return new BoardCell(2, 0);
+		if (state[0][0].equals(mark) && state[1][1].equals(mark) && state[2][2].equals("-")) {
+			return new BoardCell(2, 2);
 		}
 		if (state[1][1].equals(mark) && state[2][2].equals(mark) && state[0][0].equals("-")) {
 			return new BoardCell(0, 0);
@@ -122,8 +122,8 @@ public class Player {
 		if (state[2][0].equals(mark) && state[0][2].equals(mark) && state[1][1].equals("-")) {
 			return new BoardCell(1, 1);
 		}
-		if (state[0][2].equals(mark) && state[1][1].equals(mark) && state[2][2].equals("-")) {
-			return new BoardCell(2, 2);
+		if (state[0][2].equals(mark) && state[1][1].equals(mark) && state[2][0].equals("-")) {
+			return new BoardCell(2, 0);
 		}
 
 		for (int i = 0; i < 3; ++i) {
