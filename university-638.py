@@ -8,7 +8,7 @@ def nChoosek(n, k):
     result = n
     for i in range(2, k + 1):
         result *= (n - i + 1)
-        result /= i
+        result //= i
     return result
 
 n = int(input())
