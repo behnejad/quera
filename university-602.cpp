@@ -6,7 +6,7 @@ using namespace std;
 
 bool isA(double x, double y)
 {
-    return abs(x - (int)x - y) <= 0.2;
+    return abs(x - floor(x) - y) <= 0.2;
 }
 
 bool isB(double x, double y)
@@ -16,7 +16,7 @@ bool isB(double x, double y)
 
 bool isC(double x, double y)
 {
-    x = pow(x, 3);
+    x = (x * x * x);
     return abs(abs(1 - x) + x - y) <= 0.2;
 }
 
@@ -26,6 +26,7 @@ int main()
     int n;
     cin >> n;
     double x, y;
+    bool f = true;
 
     while (n--)
     {
@@ -33,52 +34,45 @@ int main()
         array.push_back(pair<double, double>(x, y));
     }
 
-    int count = 0;
     bool all = true;
     for (int i = 0; i < array.size() && all; ++i)
     {
         all = isA(array[i].first, array[i].second);
-//        if (!all)
-//        {
-//            cout << i << " A" << endl;
-//        }
     }
 
-    count += all ? 1 : 0;
-
+    if (all)
+    {
+        f = false;
+        cout << 1 << endl;
+    }
 
     all = true;
     for (int i = 0; i < array.size() && all; ++i)
     {
         all = isB(array[i].first, array[i].second);
-//        if (!all)
-//        {
-//            cout << i << " B" << endl;
-//        }
     }
 
-    count += all ? 1 : 0;
-
+    if (all)
+    {
+        f = false;
+        cout << 2 << endl;
+    }
 
     all = true;
     for (int i = 0; i < array.size() && all; ++i)
     {
         all = isC(array[i].first, array[i].second);
-//        if (!all)
-//        {
-//            cout << i << " C" << endl;
-//        }
     }
 
-    count += all ? 1 : 0;
+    if (all)
+    {
+        f = false;
+        cout << 3 << endl;
+    }
 
-    if (count == 0)
+    if (f)
     {
         cout << "No ones" << endl;
-    }
-    else
-    {
-        cout << count << endl;
     }
 
     return 0;
