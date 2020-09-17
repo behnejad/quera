@@ -1,92 +1,60 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
+#include<bits/stdc++.h>
 using namespace std;
 
-string r;
-vector<int> err;
-int minx;
 
-bool check()
+// Returns count of minimum reversals for making
+// expr balanced. Returns -1 if expr cannot be
+// balanced.
+int countMinReversals(string expr)
 {
-    int open = 0;
-    for (char x : r)
+    int len = expr.length();
+
+    // length of expression must be even to make
+    // it balanced by using reversals.
+    if (len%2)
+       return -1;
+
+    // After this loop, stack contains unbalanced
+    // part of expression, i.e., expression of the
+    // form "}}..}{{..{"
+    stack<char> s;
+    for (int i=0; i<len; i++)
     {
-        if (x == '(')
+        if (expr[i]==')' && !s.empty())
         {
-            ++open;
+            if (s.top()=='(')
+                s.pop();
+            else
+                s.push(expr[i]);
         }
         else
-        {
-            if (open == 0)
-            {
-                return false;
-            }
-            else
-            {
-                --open;
-            }
-        }
+            s.push(expr[i]);
     }
 
-    return open == 0;
+    // Length of the reduced expression
+    // red_len = (m+n)
+    int red_len = s.size();
+
+    // count opening brackets at the end of
+    // stack
+    int n = 0;
+    while (!s.empty() && s.top() == '(')
+    {
+        s.pop();
+        n++;
+    }
+
+    // return ceil(m/2) + ceil(n/2) which is
+    // actually equal to (m+n)/2 + n%2 when
+    // m+n is even.
+    return (red_len/2 + n%2);
 }
 
-void job(int count)
-{
-    if (check())
-    {
-        if (minx > count)
-        {
-            minx = count;
-        }
-    }
-    else
-    {
-        for (int & x : err)
-        {
-            if (x != -1)
-            {
-                int t = x;
-                x = -1;
-                r[x] = r[x] == ')' ? '(' : ')';
-                job(count + 1);
-                x = t;
-                r[x] = r[x] == ')' ? '(' : ')';
-            }
-        }
-    }
-}
-
+// Driver program to test above function
 int main()
 {
-    int open = 0;
-    cin >> r;
-    minx = r.size();
-
-    for (int i = 0; i < r.size(); ++i)
-    {
-        if (r[i] == '(')
-        {
-            ++open;
-        }
-        else
-        {
-            if (open == 0)
-            {
-                err.push_back(i);
-                ++open;
-            }
-            else
-            {
-                --open;
-            }
-        }
-    }
-
-    job(0);
-    cout << minx << endl;
-
-    return 0;
+   string expr;
+   cin >> expr;
+   cout << countMinReversals(expr) << endl;
+   return 0;
 }
