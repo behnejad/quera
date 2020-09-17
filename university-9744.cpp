@@ -1,81 +1,192 @@
-#include <iostream>
-#include <vector>
-#include <limits>
-#include <map>
-#include <cstdlib>
-#include <cstring>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-#define N 10
+#define NMAX 10
+int n;
 
-int pw[N][N] = { 0 };
-int person[N] = { 0 };
-int person2[N] = { 0 };
-int minx = numeric_limits<int>::max();
-
-bool has_work(int * a, int i)
+// state space tree node
+struct Node
 {
-    for (int j = 0; j < N && a[j] != 0; ++j)
-    {
-        if (a[j] == i)
-        {
-            return true;
-        }
-    }
+    // stores parent node of current node
+    // helps in tracing path when answer is found
+    Node* parent;
 
-    return false;
+    // contains cost for ancestors nodes
+    // including current node
+    int pathCost;
+
+    // contains least promising cost
+    int cost;
+
+    // contain worker number
+    int workerID;
+
+    // contains Job ID
+    int jobID;
+
+    // Boolean array assigned will contains
+    // info about available jobs
+    bool assigned[NMAX];
+};
+
+// Function to allocate a new search tree node
+// Here Person x is assigned to job y
+Node* newNode(int x, int y, bool assigned[],
+              Node* parent)
+{
+    Node* node = new Node;
+
+    for (int j = 0; j < n; j++)
+        node->assigned[j] = assigned[j];
+    node->assigned[y] = true;
+
+    node->parent = parent;
+    node->workerID = x;
+    node->jobID = y;
+
+    return node;
 }
 
-void find(int p, int sum, int depth)
+// Function to calculate the least promising cost
+// of node after worker x is assigned to job y.
+int calculateCost(int costMatrix[NMAX][NMAX], int x,
+                  int y, bool assigned[])
 {
-    if (p == depth)
-    {
-        if (sum < minx)
-        {
-            minx = sum;
-            memcpy(person2, person, sizeof(person));
-        }
-    }
+    int cost = 0;
 
-    for (int i = p; i < depth; ++i)
+    // to store unavailable jobs
+    bool available[NMAX] = {true};
+
+    // start from next worker
+    for (int i = x + 1; i < n; i++)
     {
-        for (int j = 1; j <= depth; ++j)
+        int min = INT_MAX, minIndex = -1;
+
+        // do for each job
+        for (int j = 0; j < n; j++)
         {
-            if (has_work(person, j) == false)
+            // if job is unassigned
+            if (!assigned[j] && available[j] &&
+                costMatrix[i][j] < min)
             {
-                person[p] = j;
-                sum += pw[p][j - 1];
-                find(p + 1, sum, depth);
-                sum -= pw[p][j - 1];
-                person[p] = 0;
+                // store job number
+                minIndex = j;
+
+                // store cost
+                min = costMatrix[i][j];
             }
         }
+
+        // add cost of next worker
+        cost += min;
+
+        // job becomes unavailable
+        available[minIndex] = false;
+    }
+
+    return cost;
+}
+
+// Comparison object to be used to order the heap
+struct comp
+{
+    bool operator()(const Node* lhs,
+                   const Node* rhs) const
+    {
+        return lhs->cost > rhs->cost;
+    }
+};
+
+// print Assignments
+void printAssignments(Node *min)
+{
+    if(min->parent==NULL)
+        return;
+
+    printAssignments(min->parent);
+//    cout << "Assign Worker " << char(min->workerID + 'A')
+//         << " to Job " << min->jobID << endl;
+    cout << min->jobID << endl;
+}
+
+// Finds minimum cost using Branch and Bound.
+int findMinCost(int costMatrix[NMAX][NMAX])
+{
+    // Create a priority queue to store live nodes of
+    // search tree;
+    priority_queue<Node*, std::vector<Node*>, comp> pq;
+
+    // initailize heap to dummy node with cost 0
+    bool assigned[NMAX] = {false};
+    Node* root = newNode(-1, -1, assigned, NULL);
+    root->pathCost = root->cost = 0;
+    root->workerID = -1;
+
+    // Add dummy node to list of live nodes;
+    pq.push(root);
+
+    // Finds a live node with least cost,
+    // add its childrens to list of live nodes and
+    // finally deletes it from the list.
+    while (!pq.empty())
+    {
+      // Find a live node with least estimated cost
+      Node* min = pq.top();
+
+      // The found node is deleted from the list of
+      // live nodes
+      pq.pop();
+
+      // i stores next worker
+      int i = min->workerID + 1;
+
+      // if all workers are assigned a job
+      if (i == n)
+      {
+          printAssignments(min);
+          return min->cost;
+      }
+
+      // do for each job
+      for (int j = 0; j < n; j++)
+      {
+        // If unassigned
+        if (!min->assigned[j])
+        {
+          // create a new tree node
+          Node* child = newNode(i, j, min->assigned, min);
+
+          // cost for ancestors nodes including current node
+          child->pathCost = min->pathCost + costMatrix[i][j];
+
+          // calculate its lower bound
+          child->cost = child->pathCost +
+            calculateCost(costMatrix, i, j, child->assigned);
+
+          // Add child to list of live nodes;
+          pq.push(child);
+        }
+      }
     }
 }
 
 int main()
 {
-    int n, t;
     cin >> n;
+    int costMatrix[NMAX][NMAX];
 
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < n; ++j)
         {
-             cin >> pw[i][j];
+            cin >> costMatrix[i][j];
         }
     }
 
-    find(0, 0, n);
 
-    for (int x : person2)
-    {
-        if (x != 0)
-        {
-            cout << x - 1 << endl;
-        }
-    }
+//    cout << "\nOptimal Cost is " << endl
+//        << findMinCost(costMatrix);
 
+    findMinCost(costMatrix);
     return 0;
 }
