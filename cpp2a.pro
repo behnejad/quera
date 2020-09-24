@@ -5,5 +5,4 @@ CONFIG -= qt
 
 CCFLAG += -fpermissive
 
-SOURCES += \
-    contest-44072.cpp
+SOURCES += olympiad-9057.cpp

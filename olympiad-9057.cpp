@@ -3,12 +3,14 @@
 
 using namespace std;
 
+typedef unsigned long long ull;
+
 int main()
 {
     int n;
     cin >> n;
 
-    vector<unsigned long long> a(n);
+    vector<ull> a(n);
     for (int i = 0; i < n; ++i)
     {
         cin >> a[i];
@@ -21,7 +23,7 @@ int main()
     {
         int s, k;
         cin >> s >> k;
-        unsigned long long j = 0;
+        ull j = 0;
 
         int u = (n - s) / k;
         for (int i = 1; i <= u; ++i)
