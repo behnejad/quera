@@ -1,43 +1,55 @@
 #include <iostream>
 #include <string>
-#include <set>
 
 using namespace std;
 
-int main()
-{
-    int n;
-    string t, org;
-    cin >> n >> t;
-    org = t;
-    set<char> alphabet;
-    set<string> used;
-    for (char x : t)
-    {
-        alphabet.insert(x);
-    }
+int main(){
 
-    while (n--)
+    int n;
+    string t;
+    cin >> n >> t;
+
+    for (int i = 0; i < n; i++)
     {
-        t.clear();
-        cin >> t;
-        if (t == org || used.count(t) != 0)
+        string code;
+        cin >> code;
+        bool code_situation = true;
+
+        for (int j = 0; j < code.size(); j++)
         {
-            cout << "No" << endl;
-        }
-        else
-        {
-            bool boo = true;
-            for (int i = 0; i < t.size() && boo; ++i)
+            bool character = false;
+            for (int k = 0; k < t.size(); k++)
             {
-                if (alphabet.count(t[i]) == 0)
+                if (code[j] == t[k])
                 {
-                    boo = false;
+                    character = true;
                 }
             }
-            cout << (boo ? "Yes" : "No") << endl;
+
+            if (not character)
+            {
+                code_situation = false;
+            }
         }
-        used.insert(t);
+
+        for (int j = 0; j < t.size(); j++)
+        {
+            bool character = false;
+            for (int k = 0; k < code.size(); k++)
+            {
+                if (t[j] == code[k])
+                {
+                    character = true;
+                }
+            }
+
+            if (not character)
+            {
+                code_situation = false;
+            }
+        }
+
+        cout << ((code_situation) ? "Yes" : "No") << endl;
     }
 
     return 0;
