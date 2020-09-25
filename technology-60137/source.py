@@ -1,61 +1,47 @@
-
-
 def guess_generator_iterator(guess_generator, min_value, max_value, assumed_number):
-    last = assumed_number
     gen = guess_generator(min_value, max_value)
-    qm = 0
-    res = []
-    send = None
-
-    start = False
     try:
-        value = next(gen)
-        start = True
-    except:
-        pass
+        guess = next(gen)
+    except StopIteration:
+        return []
 
-    while start:
-        if send == 'E':
-            qm += 1
+    res = []
+    found, oops_count = False, 0
+    last_guess = last_judge = None
+
+    while True:
+        judge = None
+        if guess == assumed_number:
+            judge = 'E'
+        elif guess > assumed_number:
+            judge = 'G'
+        elif guess < assumed_number:
+            judge = 'L'
+
+        oops = False
+        if guess < min_value or guess > max_value or found:
+            oops = True
+        elif judge == 'E':
+            found = True
+        elif judge == 'G':
+            if last_judge == 'G' and guess >= last_guess:
+                oops = True
+        elif judge == 'L':
+            if last_judge == 'L' and guess <= last_guess:
+                oops = True
+
+        last_guess, last_judge = guess, judge
+        res.append(guess)
+        if oops:
             res.append('!')
-            if qm == 3:
-                res.append('!!!')
-                break
+            oops_count += 1
 
-        elif send == 'G' and value >= last:
-            qm += 1
-            res.append('!')
-            if qm == 3:
-                res.append('!!!')
-                break
-
-        elif send == 'L' and value <= last:
-            qm += 1
-            res.append('!')
-            if qm == 3:
-                res.append('!!!')
-                break
-
-        elif value < min_value or value > max_value:
-            qm += 1
-            res.append('!')
-            if qm == 3:
-                res.append('!!!')
-                break
-
-        if value == assumed_number:
-            send = 'E'
-        elif value < assumed_number:
-            send = 'L'
-        else:
-            send = 'G'
-
-        last = value
-        res.append(value)
-
+        if oops_count == 3:
+            res.append('!!!')
+            break
         try:
-            value = gen.send(send)
-        except:
+            guess = gen.send(judge)
+        except StopIteration:
             break
 
     return res
