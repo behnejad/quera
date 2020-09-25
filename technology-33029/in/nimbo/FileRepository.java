@@ -88,17 +88,18 @@ public class FileRepository {
      * @return array of sorted files.
      */
     public NimboFile[] sort(Comparator<NimboFile> comparator) {
-		if (files == null) {
-			return null;
-		} else if (files.size() != 0) {
-            List<NimboFile> sortedList = new ArrayList<>(files);
-            if (comparator != null) {
-                Collections.sort(sortedList, comparator);
-            }
-            return (NimboFile[]) sortedList.toArray();
-        } else {
-            return new NimboFile[0];
+		ArrayList<NimboFile> myList = new ArrayList<>();
+        for (NimboFile file : files) {
+            myList.add(file);
         }
+        myList.sort(comparator);
+        NimboFile[] result = new NimboFile[myList.size()];
+        int i = 0;
+        for (NimboFile file : myList) {
+            result[i] = myList.get(i);
+            i++;
+        }
+        return result;
     }
 
     /**
