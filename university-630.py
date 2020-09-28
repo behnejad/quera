@@ -1,24 +1,33 @@
-import functools
+from functools import cmp_to_key
 
-##in_str = input().split()[:-1]
-in_str = "alireza Mohammad Arash anahita sarah Milad john Alireza Maryam".split()
-clone = [x for x in in_str]
-def m_sort(a, b):
-    global clone
-    if a[0].lower() > b[0].lower():
-        return 1
-    if a[0].lower() == b[0].lower():
-        if a[0].islower() and b[0].isupper():
-            return 1
+words = input().split()[:-1]
+##words = "alireza Mohammad Arash anahita sarah Milad john Alireza Maryam".split()
 
-    return 0
+def compare(a, b):
+    global words
+    aa = a[0].lower()
+    bb = b[0].lower()
+    if bb > aa:
+        return -1
+    elif bb < aa:
+        return +1
+    else:
+        if a[0] < b[0]:
+            return -1
+        elif a[0] > b[0]:
+            return +1
+        else:
+            aa = a[1].lower()
+            bb = b[1].lower()
+            if bb > aa:
+                return -1
+            elif bb < aa:
+                return +1
+            elif len(a) < len(b):
+                return +1
+            else:
+                return words.index(a) < words.index(b)
 
-for i in range(len(in_str)):
-    for j in range(0, len(in_str) - i - 1):
-        k = m_sort(in_str[j], in_str[j + 1])
-        if k == 1:
-            in_str[j], in_str[j + 1] = in_str[j + 1], in_str[j]
-        elif k == -1:
-            in_str[j + 1], in_str[j] = in_str[j], in_str[j + 1]
 
-print(in_str)
+words = sorted(words, key=cmp_to_key(compare))
+print(" ".join(words))
