@@ -1,16 +1,11 @@
 jomle = input().lower()
 kalame = input().lower()
 j1 = []
-j2 = ""
+ponc = "!@#$%^&*()-_=+,./;\\[]{}:\"|?><"
+for i in ponc:
+    jomle = jomle.replace(i, " ")
 
-for i in jomle:
-    if i in "_!. ,()+=*&^%$#@'\";/`~?><|:":
-        j1.append(j2)
-        j2 = ""
-    else:
-        j2 += i
-
-j1.append(j2)
+j1 = jomle.split()
 res = j1.count(kalame) + j1.count(kalame[::-1])
 print(res)
 
