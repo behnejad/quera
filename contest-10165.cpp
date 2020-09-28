@@ -1,63 +1,57 @@
-#include <iostream>
-#include <set>
-#include <vector>
-#include <algorithm>
-#include <limits>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-template <class T1, class T2, class Pred = std::less<T2> >
-struct sort_pair_second
-{
-    Pred p;
-    bool operator()(const std::pair<T1,T2> & left, const std::pair<T1,T2> & right)
-    {
-        return p(left.first, right.first);
-    }
-};
+const int MAXN = 5e5 + 10;
+
+pair<int, int> arr[MAXN];
+int n;
+int have[MAXN], num, maper;
+map<int, int> mp;
+int answer = 1e9 + 1;
 
 int main()
 {
-    int n, aldangi = 0, len = numeric_limits<int>::max(), x;
-    long long a;
-    cin >> n;
-
-    vector<pair<int, long long>> array(n);
-
-    for (int i = 0; i < n; ++i)
-    {
-        cin >> x >> a;
-        array[i].first = x;
-        array[i].second = a;
-    }
-
-    sort(array.begin(), array.end(), sort_pair_second<int, int, std::less_equal<int>>());
-
-    set<long long> s;
-    for (int i = 0; i < n; ++i)
-    {
-        s.clear();
-        s.insert(array[i].second);
-
-        for (int j = i; j < n; ++j)
-        {
-            s.insert(array[j].second);
-            x = s.size();
-            if (x > aldangi)
-            {
-                aldangi = x;
-                len = array[j].first - array[i].first;
-            }
-            else if (x == aldangi)
-            {
-                if (len > (array[j].first - array[i].first))
-                {
-                    len = array[j].first - array[i].first;
-                }
-            }
-        }
-    }
-
-    cout << len << endl;
-    return 0;
+	ios::sync_with_stdio(0);
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> arr[i].first >> arr[i].second;
+		if (mp[arr[i].second] == 0)
+		{
+			mp[arr[i].second] = ++maper;
+		}
+		arr[i].second = mp[arr[i].second];
+	}
+	sort(arr, arr + n);
+	int posl = 0;
+	int posr = 0;
+	have[arr[0].second]++;
+	num = 1;
+	for (int i = 0; i < n; i++)
+	{
+		if (i)
+		{
+			posl++;
+			have[arr[posl - 1].second]--;
+			if (have[arr[posl - 1].second] == 0)
+			{
+				num--;
+			}
+		}
+		while (num < maper && posr < n - 1)
+		{
+			posr++;
+			have[arr[posr].second]++;
+			if (have[arr[posr].second] == 1)
+			{
+				num++;
+			}
+		}
+		//cout << posl << ' ' << posr <<' ' << arr[posr].first << ' ' << arr[posl].first << ' ' << endl;
+		if (num == maper)
+			answer = min(answer, arr[posr].first - arr[posl].first);
+	}
+	cout << answer;
+	return 0;
 }
