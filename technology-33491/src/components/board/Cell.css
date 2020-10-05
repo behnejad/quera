@@ -1,0 +1,78 @@
+.cell {
+    background: #cdc1b4;
+    border-radius: 4px;
+    position: relative;
+}
+
+.cell:before {
+    content: ' ';
+    width: 80%;
+    height: 80%;
+    background: transparent no-repeat top left;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+.cell.unknown {
+    cursor: pointer;
+}
+
+.cell.bomb:before {
+    background-image: url(bomb.svg)
+}
+
+.cell.user1 {
+    background: #5a95bb;
+}
+
+.cell.user2 {
+    background: #d65547;
+}
+
+.cell.number {
+    background: #8e250c;
+    color: #f9f6f2;
+    font-weight: bold;
+    font-size: 36px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell.number-0 {
+    color: #eee4da;
+    background: #eee4da;
+}
+
+.cell.number-1 {
+    color: #776e65;
+    background: #eee4da;
+}
+
+.cell.number-2 {
+    color: #786f66;
+    background: #ede0c8;
+}
+
+.cell.number-3 {
+    background: #f2b179;
+}
+
+.cell.number-4 {
+    background: #f59563;
+}
+
+.cell.number-5 {
+    background: #f67c5f;
+}
+
+.cell.number-6 {
+    background: #d35400;
+}
+
+.cell.number-7 {
+    background: #e74c3c;
+}

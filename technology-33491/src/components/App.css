@@ -1,0 +1,17 @@
+.game-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #faf8ef;
+    color: #776e65;
+}
+
+.game {
+
+}
+
+h1 {
+    font-size: 4em;
+    margin: 0;
+}

@@ -1,0 +1,30 @@
+.board {
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    background: #bbada0;
+    border-radius: 10px;
+    position: relative;
+}
+
+.layerMask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 128px;
+    line-height: 128px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.board.current .layerMask{
+    background: rgba(255, 255, 255, 0.2);
+}

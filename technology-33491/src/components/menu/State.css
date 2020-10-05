@@ -1,0 +1,39 @@
+.state {
+    margin: 1em 0;
+    padding: 10px;
+    background: #bbada0;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2em;
+
+}
+
+.state.turn-1, .state.win-1 {
+    background: #5a95bb;
+    color: #000;
+}
+
+.state.turn-2, .state.win-2 {
+    background: #d65547;
+    color: #fff;
+}
+
+.state.turn-1:before {
+    content: 'User 1'
+}
+
+.state.turn-2:before {
+    content: 'User 2'
+}
+
+.state.win-1:before {
+    content: 'User 1 Wins'
+}
+
+.state.win-2:before {
+    content: 'User 2 Wins'
+}
+
+.state.win-0:before {
+    content: '='
+}
