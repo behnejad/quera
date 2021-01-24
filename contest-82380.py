@@ -1,6 +1,6 @@
 import re
 
-reg = re.compile(r"^[\w_\-][\w_\-\.]*@[\w_\-][\w_\-\.]*\.[\w\-]+$")
+reg = re.compile(r"^[\w_\-][\w_\-\.]*@[\w_\-][\w_\-\.]*\.[\w\-_]+$")
 
 l = [input().lower() for i in range(int(input()))]
 
