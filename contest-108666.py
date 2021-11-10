@@ -10,6 +10,7 @@ st_id = 1
 
 while True:
     line = input()
+
     if line == "":
         continue
     else:
@@ -88,11 +89,11 @@ while True:
         if cur.execute(f"select count(1) from class where id = '{line[1]}'").fetchone()[0] == 0:
             print("invalid class")
         else:
-            res = cur.execute(f"select name from teacher where id = (select t_id from class where id = '{line[1]}')").fetchone()[0]
-            if res == '':
+            tid = cur.execute(f"select t_id from class where id = '{line[1]}'").fetchone()[0]
+            if tid == "":
                 res = "None "
             else:
-                res += " "
+                res = cur.execute(f"select name from teacher where id = '{tid}'").fetchone()[0] + " "
 
             for n in cur.execute(f"select student.name from student left outer join class_member where student.id = class_member.st_id and class_member.cl_id = '{line[1]}'"):
                 res += n[0] + " "
